@@ -1,0 +1,719 @@
+/* Tema Claro */
+body.light {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e0e0e0; /* Fundo mais suave */
+    color: #333;
+}
+
+/* Tema Escuro */
+body.dark {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Fundo menos agressivo */
+    color: #e0e0e0;
+}
+
+/* Cabeçalho */
+#header {
+    width: 100%;
+    background-color: #a5d6a7; /* Verde claro */
+    color: inherit;
+    text-align: center;
+    padding: 18px 15px;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+body.dark #header {
+    background-color: #2e7d32; /* Verde escuro para o tema escuro */
+}
+
+/* Barra lateral */
+#sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 60px;
+    left: 0;
+    background-color: inherit;
+    overflow-x: hidden;
+    padding-top: 20px;
+    border-right: 1px solid #ddd;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Links da barra lateral */
+#sidebar a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: inherit;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#sidebar a:hover {
+    background-color: #c8e6c9; /* Verde claro no hover */
+    color: #1b5e20;
+}
+
+body.dark #sidebar a:hover {
+    background-color: #2e7d32;
+    color: #c8e6c9;
+}
+
+/* Conteúdo principal */
+#main-content {
+    margin-left: 250px;
+    padding: 80px 20px 20px 20px;
+    transition: margin-left 0.5s;
+    text-align: center;
+}
+
+/* Títulos no conteúdo principal */
+#main-content h2 {
+    margin-bottom: 20px;
+    color: inherit;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Rótulos no conteúdo principal */
+#main-content label {
+    display: block;
+    margin-top: 20px;
+    color: inherit;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Campos de entrada de texto */
+#main-content input[type="text"] {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body.dark #main-content input[type="text"] {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+/* Texto pequeno no conteúdo principal */
+#main-content small {
+    display: block;
+    margin-top: 5px;
+    color: #777;
+    font-size: 12px;
+    text-align: center;
+}
+
+body.dark #main-content small {
+    color: #aaa;
+}
+
+/* Botões */
+button#registerTypeZap {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+button#registerTypeZap:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+/* Ícones */
+.fas {
+    margin-right: 10px;
+    color: #777;
+}
+
+body.dark .fas {
+    color: #aaa;
+}
+
+.deleteFluxo i {
+    cursor: pointer;
+    color: #e53935; /* Cor vermelha para o ícone da lixeira */
+}
+
+body.dark .deleteFluxo i {
+    color: #ef9a9a; /* Vermelho mais claro no tema escuro */
+}
+
+/* Wrapper de Fluxos */
+#fluxosWrapper {
+    color: inherit;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Lista de Fluxos */
+#fluxosList {
+    background-color: inherit;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 1000px; /* Adicionado para aumentar a altura máxima */
+    overflow-y: auto; /* Permitir rolagem quando o conteúdo excede a altura máxima */
+}
+
+#fluxosList table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#fluxosList th, #fluxosList td {
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+body.dark #fluxosList th, body.dark #fluxosList td {
+    border-bottom: 1px solid #c93c3c;
+}
+
+#fluxosList tr:hover {
+    background-color: #c8e6c9;
+}
+
+body.dark #fluxosList tr:hover {
+    background-color: #2e7d32;
+}
+
+#fluxosList th {
+    position: sticky;
+    top: 0;
+    background-color: #4CAF50;
+    color: white;
+    border-bottom: 3px solid #388e3c;
+}
+
+/* Botões no Wrapper de Fluxos */
+#fluxosWrapper button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#atualizarLista, #adicionarFluxo, #atualizarListaRapida, #adicionarRespostaRapida, #atualizarGrupo, #atualizarListaRmkt, #adicionarRmkt {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#atualizarLista:hover, #adicionarFluxo:hover, #atualizarListaRapida:hover, #adicionarRespostaRapida:hover, #atualizarGrupo:hover, #atualizarListaRmkt:hover, #adicionarRmkt:hover {
+    background-color: #388e3c;
+}
+
+/* Entrada de Texto */
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body.dark input[type="text"] {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+/* Modal de Adicionar Fluxo */
+#addFluxoModalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+#addFluxoModal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 500px;
+}
+
+body.dark #addFluxoModal {
+    background-color: #333;
+}
+
+#addFluxoModal input[type="text"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body.dark #addFluxoModal input[type="text"] {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+#addFluxoModal button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#addFluxoModal button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+#closeModal {
+    float: right;
+    cursor: pointer;
+    color: inherit;
+    font-size: 24px;
+}
+
+body.dark #closeModal {
+    color: white;
+}
+
+/* Carregar Leads */
+#carregarLeads {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px auto;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+body.dark #carregarLeads {
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#carregarLeads h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+body.dark #carregarLeads h2 {
+    color: white;
+}
+
+#fileInput, #uploadButton {
+    width: 90%;
+    padding: 10px;
+    margin: 10px auto 20px;
+    display: inline-block;
+}
+
+#fileInput {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+body.dark #fileInput {
+    border: 1px solid #555;
+    background-color: #333;
+    color: #e0e0e0;
+}
+
+#uploadButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#uploadButton:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+.file-upload-wrapper {
+    position: relative;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.file-upload-input {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-button, #uploadButton {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.file-upload-button {
+    background-color: #4CAF50;
+}
+
+.file-upload-text {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+body.dark .file-upload-text {
+    color: #e0e0e0;
+}
+
+/* Carregar Arquivo de Mídia */
+#carregarArquivoMidia {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px auto;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+body.dark #carregarArquivoMidia {
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#carregarArquivoMidia h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+body.dark #carregarArquivoMidia h2 {
+    color: white;
+}
+
+.file-upload-wrapper {
+    position: relative;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.file-upload-input {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-button, #uploadButtonMidia {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.file-upload-button {
+    background-color: #4CAF50;
+}
+
+#uploadButtonMidia {
+    background-color: #388e3c;
+}
+
+.file-upload-text {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+body.dark .file-upload-text {
+    color: #e0e0e0;
+}
+
+/* Estilização de hover para botões */
+.file-upload-button:hover, #uploadButtonMidia:hover {
+    background-color: #2e7d32;
+    transform: scale(1.05);
+}
+
+/* Despacho de Mensagem em Massa */
+#massMessageDispatch {
+    text-align: center;
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.dark #massMessageDispatch {
+    background-color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group div {
+    display: inline-block;
+    width: 48%;
+    margin-right: 4%;
+}
+
+.input-group div:last-child {
+    margin-right: 0;
+}
+
+.input-group label {
+    display: block;
+    margin: 10px auto;
+    color: #333;
+}
+
+body.dark .input-group label {
+    color: #e0e0e0;
+}
+
+.buttons-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.buttons-group button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    width: auto;
+    display: inline-block;
+}
+
+#iniciarCampanha, #pararCampanha {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#iniciarCampanha:hover, #pararCampanha:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+select, input[type="number"] {
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body.dark select, body.dark input[type="number"] {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #e0e0e0;
+}
+
+#massMessageDispatch input[type="number"], #massMessageDispatch select {
+    width: 95%;
+}
+
+#massMessageDispatch label {
+    color: #333;
+}
+
+body.dark #massMessageDispatch label {
+    color: #e0e0e0;
+}
+
+.input-group-inline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-group-inline > div {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-group-inline > div:last-child {
+    margin-right: 0;
+}
+
+.input-group-inline input[type="number"] {
+    width: 95%;
+}
+
+#addFluxoModalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+#addFluxoModal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    max-width: 90%;
+}
+
+body.dark #addFluxoModal {
+    background-color: #333;
+}
+
+#addFluxoModal h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+body.dark #addFluxoModal h2 {
+    color: white;
+}
+
+#addFluxoModal label {
+    color: #333;
+    display: block;
+    margin-top: 10px;
+}
+
+body.dark #addFluxoModal label {
+    color: white;
+}
+
+#addFluxoModal input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body.dark #addFluxoModal input[type="text"] {
+    background-color: #444;
+    border: 1px solid #555;
+    color: white;
+}
+
+#addFluxoModal button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#addFluxoModal button:hover {
+    background-color: #388e3c;
+    transform: scale(1.05);
+}
+
+#closeModal {
+    float: right;
+    cursor: pointer;
+    color: #333;
+    font-size: 24px;
+}
+
+body.dark #closeModal {
+    color: white;
+}
+
+#response {
+    margin-top: 20px;
+}

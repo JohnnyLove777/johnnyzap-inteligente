@@ -1,0 +1,29 @@
+{
+  "name": "johnnyzap",
+  "version": "1.4.0",
+  "author": "Eric Reis",
+  "description": "JohnnyZapAI Projetado pelo Johnny Love - Uso livre para projetos comerciais, uso condicional para infoprodutos com temática igual ou semelhante ao treinamento JohnnyZap (entrar em contato)",
+  "dependencies": {
+    "axios": "latest",
+    "body-parser": "latest",
+    "child_process": "latest",
+    "csv-parser": "^3.0.0",
+    "dotenv": "latest",
+    "express": "latest",
+    "cors": "^2.8.5",
+    "jimp": "^0.22.10",
+    "node-fetch": "^2.6.1",
+    "openai": "^4.0.0",    
+    "socket.io": "^4.7.4",
+    "uuid": "latest",
+    "mime-types": "^2.1.35",
+    "socket.io-client": "^4.4.1",    
+    "ws": "^7.4.6"
+  },
+  "devDependencies": {
+    "pm2": "latest"
+  },
+  "scripts": {    
+    "install-ffmpeg": "sudo apt install ffmpeg"
+  }
+}
