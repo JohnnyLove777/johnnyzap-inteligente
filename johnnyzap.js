@@ -678,6 +678,28 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
         
             johnny.EnviarLocalizacao(numeroId, nome, endereco, latitude, longitude, 2000, apiKeyEVO, instanceName);
           }
+          if (formattedText.startsWith('!split')) {
+            const regexConteudo = /\[(.*?)\]/g;
+            const matches = [...formattedText.matchAll(regexConteudo)];
+    
+            const caracteres = matches[0] ? matches[0][1] : '';
+            const texto = matches[1] ? matches[1][1] : '';
+    
+            // Split o texto pelos caracteres fornecidos
+            const conteudos = texto.split(caracteres);
+    
+            // Função para enviar os textos com delay
+            const enviarComDelay = (conteudos, delay) => {
+            conteudos.forEach((conteudo, index) => {
+            setTimeout(() => {
+                johnny.EnviarTexto(datafrom, conteudo.trim(), 4000, apiKeyEVO, instanceName);
+            }, index * delay);
+          });
+          };
+
+           // Enviar cada conteúdo separadamente com delay de 2 segundos (2000 ms)
+          enviarComDelay(conteudos, 3000);
+          }
           if (formattedText.startsWith('!entenderaudio')) {          
             if (db.existsDB(datafrom)) {
               db.updateNextAudio(datafrom, true);
@@ -760,7 +782,7 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
                 })
                 .catch((error) => console.error("Erro durante a geração da imagem:", error));
           }                                
-          if (!(formattedText.startsWith('!wait')) && !(formattedText.startsWith('!arquivo')) && !(formattedText.startsWith('!reaction')) && !(formattedText.startsWith('!local')) && !(formattedText.startsWith('!caption')) && !(formattedText.startsWith('!fim')) && !(formattedText.startsWith('!optout')) && !(formattedText.startsWith('!reiniciar')) && !(formattedText.startsWith('!media')) && !(formattedText.startsWith('!directmessage')) && !(formattedText.startsWith('Invalid message. Please, try again.')) && !(formattedText.startsWith('!rapidaagendada')) && !(formattedText.startsWith('!entenderaudio')) && !(formattedText.startsWith('!entenderimagem')) && !(formattedText.startsWith('!audioopenai')) && !(formattedText.startsWith('!audioeleven')) && !(formattedText.startsWith('!imagemopenai'))) {
+          if (!(formattedText.startsWith('!wait')) && !(formattedText.startsWith('!split')) && !(formattedText.startsWith('!arquivo')) && !(formattedText.startsWith('!reaction')) && !(formattedText.startsWith('!local')) && !(formattedText.startsWith('!caption')) && !(formattedText.startsWith('!fim')) && !(formattedText.startsWith('!optout')) && !(formattedText.startsWith('!reiniciar')) && !(formattedText.startsWith('!media')) && !(formattedText.startsWith('!directmessage')) && !(formattedText.startsWith('Invalid message. Please, try again.')) && !(formattedText.startsWith('!rapidaagendada')) && !(formattedText.startsWith('!entenderaudio')) && !(formattedText.startsWith('!entenderimagem')) && !(formattedText.startsWith('!audioopenai')) && !(formattedText.startsWith('!audioeleven')) && !(formattedText.startsWith('!imagemopenai'))) {
             johnny.EnviarTexto(datafrom, formattedText, 2000, apiKeyEVO, instanceName);  
             //db.updateDelay(datafrom, null);          
           }      
@@ -1096,6 +1118,27 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                     
                         johnny.EnviarLocalizacao(remoteJid, nome, endereco, latitude, longitude, 2000, apiKeyEVO, instanceName);
                       }
+                      if (formattedText.startsWith('!split')) {
+                        const regexConteudo = /\[(.*?)\]/g;
+                        const matches = [...formattedText.matchAll(regexConteudo)];
+    
+                        const caracteres = matches[0] ? matches[0][1] : '';
+                        const texto = matches[1] ? matches[1][1] : '';
+    
+                        // Split o texto pelos caracteres fornecidos
+                        const conteudos = texto.split(caracteres);
+    
+                        // Função para enviar os textos com delay
+                        const enviarComDelay = (conteudos, delay) => {
+                        conteudos.forEach((conteudo, index) => {
+                        setTimeout(() => {
+                        johnny.EnviarTexto(remoteJid, conteudo.trim(), 4000, apiKeyEVO, instanceName);
+                        }, index * delay);
+                        });
+                        };
+                        // Enviar cada conteúdo separadamente com delay de 2 segundos (2000 ms)
+                        enviarComDelay(conteudos, 3000);
+                      }
                       if (formattedText.startsWith('!entenderaudio')) {          
                         if (db.existsDB(remoteJid)) {
                           db.updateNextAudio(remoteJid, true);
@@ -1177,7 +1220,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                             })
                             .catch((error) => console.error("Erro durante a geração da imagem:", error));
                       }                         
-                      if (!(formattedText.startsWith('!wait')) && !(formattedText.startsWith('!arquivo')) && !(formattedText.startsWith('!reaction')) && !(formattedText.startsWith('!local')) && !(formattedText.startsWith('!caption')) && !(formattedText.startsWith('!fim')) && !(formattedText.startsWith('!optout')) && !(formattedText.startsWith('!reiniciar')) && !(formattedText.startsWith('!media')) && !(formattedText.startsWith('!directmessage')) && !(formattedText.startsWith('Invalid message. Please, try again.')) && !(formattedText.startsWith('!rapidaagendada')) && !(formattedText.startsWith('!entenderaudio')) && !(formattedText.startsWith('!entenderimagem')) && !(formattedText.startsWith('!audioopenai')) && !(formattedText.startsWith('!audioeleven')) && !(formattedText.startsWith('!imagemopenai'))) {
+                      if (!(formattedText.startsWith('!wait')) && !(formattedText.startsWith('!split')) && !(formattedText.startsWith('!arquivo')) && !(formattedText.startsWith('!reaction')) && !(formattedText.startsWith('!local')) && !(formattedText.startsWith('!caption')) && !(formattedText.startsWith('!fim')) && !(formattedText.startsWith('!optout')) && !(formattedText.startsWith('!reiniciar')) && !(formattedText.startsWith('!media')) && !(formattedText.startsWith('!directmessage')) && !(formattedText.startsWith('Invalid message. Please, try again.')) && !(formattedText.startsWith('!rapidaagendada')) && !(formattedText.startsWith('!entenderaudio')) && !(formattedText.startsWith('!entenderimagem')) && !(formattedText.startsWith('!audioopenai')) && !(formattedText.startsWith('!audioeleven')) && !(formattedText.startsWith('!imagemopenai'))) {
                         johnny.EnviarTexto(remoteJid, formattedText, 2000, apiKeyEVO, instanceName);  
                         //db.updateDelay(remoteJid, null);
                       }                                                    
