@@ -810,7 +810,7 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
       if (input) {
       if (input.type === 'choice input') {
       const items = input.items;
-      const secoes = [
+      /*const secoes = [
         {
           title: "Opções",
           rows: items.map((item, index) => ({
@@ -818,6 +818,53 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
             description: '',
             rowId: `rowId_${index + 1}`
           }))
+        }
+      ];*/
+      const secoes = [
+        {
+          title: "Entradas",
+          rows: [
+            {
+              title: "Salada Caesar",
+              description: "Uma clássica salada Caesar com alface romana, croutons e molho especial.",
+              rowId: "rowId_entradas_001"
+            },
+            {
+              title: "Sopa de Tomate",
+              description: "Sopa cremosa de tomate com manjericão fresco.",
+              rowId: "rowId_entradas_002"
+            }
+          ]
+        },
+        {
+          title: "Pratos Principais",
+          rows: [
+            {
+              title: "Filé Mignon",
+              description: "Filé mignon grelhado servido com batatas rústicas e legumes ao vapor.",
+              rowId: "rowId_pratos_001"
+            },
+            {
+              title: "Lasanha à Bolonhesa",
+              description: "Lasanha tradicional com molho bolonhesa, queijo derretido e molho bechamel.",
+              rowId: "rowId_pratos_002"
+            }
+          ]
+        },
+        {
+          title: "Sobremesas",
+          rows: [
+            {
+              title: "Cheesecake de Morango",
+              description: "Cheesecake cremoso com cobertura de morangos frescos.",
+              rowId: "rowId_sobremesas_001"
+            },
+            {
+              title: "Tiramisu",
+              description: "Tradicional tiramisu italiano com café, mascarpone e cacau.",
+              rowId: "rowId_sobremesas_002"
+            }
+          ]
         }
       ];
 
@@ -1278,16 +1325,63 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                   if (input) {
                   if (input.type === 'choice input') {
                   const items = input.items;
-                  const secoes = [
-                  {
-                  title: "Opções",
-                  rows: items.map((item, index) => ({
-                  title: item.content,
-                  description: '',
-                  rowId: `rowId_${index + 1}`
-                  }))
-                  }
-                  ];
+                  /*const secoes = [
+        {
+          title: "Opções",
+          rows: items.map((item, index) => ({
+            title: item.content,
+            description: '',
+            rowId: `rowId_${index + 1}`
+          }))
+        }
+      ];*/
+      const secoes = [
+        {
+          title: "Entradas",
+          rows: [
+            {
+              title: "Salada Caesar",
+              description: "Uma clássica salada Caesar com alface romana, croutons e molho especial.",
+              rowId: "rowId_entradas_001"
+            },
+            {
+              title: "Sopa de Tomate",
+              description: "Sopa cremosa de tomate com manjericão fresco.",
+              rowId: "rowId_entradas_002"
+            }
+          ]
+        },
+        {
+          title: "Pratos Principais",
+          rows: [
+            {
+              title: "Filé Mignon",
+              description: "Filé mignon grelhado servido com batatas rústicas e legumes ao vapor.",
+              rowId: "rowId_pratos_001"
+            },
+            {
+              title: "Lasanha à Bolonhesa",
+              description: "Lasanha tradicional com molho bolonhesa, queijo derretido e molho bechamel.",
+              rowId: "rowId_pratos_002"
+            }
+          ]
+        },
+        {
+          title: "Sobremesas",
+          rows: [
+            {
+              title: "Cheesecake de Morango",
+              description: "Cheesecake cremoso com cobertura de morangos frescos.",
+              rowId: "rowId_sobremesas_001"
+            },
+            {
+              title: "Tiramisu",
+              description: "Tradicional tiramisu italiano com café, mascarpone e cacau.",
+              rowId: "rowId_sobremesas_002"
+            }
+          ]
+        }
+      ];
 
                   johnny.EnviarLista(remoteJid,"Escolha abaixo", "Escolha uma das opções abaixo para saber mais detalhes", "Clique aqui", "Vamos lá", secoes, 3000, apiKeyEVO, instanceName);
                   }
