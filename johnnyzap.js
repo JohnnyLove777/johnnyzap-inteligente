@@ -1005,23 +1005,20 @@ app.post('/webhook/messages-upsert', async (req, res) => {
     } else if (messageData.messageType === 'listResponseMessage') {
     messageBody = messageData.message.listResponseMessage.title;
     }
-    console.log(messageBody);
+    
     const remoteJid = messageData.key.remoteJid; // Numero de wpp do remetente
     const messageId = messageData.key.id; // ID da mensagem original para reações e baixar mídia
   
     try {
       const fromMe = await johnny.isFromMe(event);
-      console.log(`fromMe: ${fromMe}`);
-      console.log(messageData);
-  
+      //console.log(`fromMe: ${fromMe}`);
+        
       if (fromMe) {
         // Resposta Rápida
         await processMessageV2(messageBody, remoteJid, messageId, instanceName, apiKeyEVO);        
       } else if (!fromMe) {
            
-        const typebotKey = await db.readFluxo(remoteJid);
-        console.log(typebotKey);
-        console.log(remoteJid);
+        const typebotKey = await db.readFluxo(remoteJid);       
 
         if (!typebotKey) {
             if (remoteJid.endsWith('@s.whatsapp.net')) {
@@ -1045,16 +1042,9 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                             
               db.updateInteract(remoteJid, 'typing');
               db.updateId(remoteJid, messageId);
-
-              console.log(remoteJid);
-                              
+                                            
                 const sessionId = await db.readSessionId(remoteJid);
-                const chaturl = `${db.readInstanceURL(instanceName).url_chat}${sessionId}/continueChat`;
-
-                console.log(sessionId);
-                console.log(chaturl);
-
-                console.log(messageBody);
+                const chaturl = `${db.readInstanceURL(instanceName).url_chat}${sessionId}/continueChat`;                
 
                 let content;                
                 if (messageData.messageType === 'conversation') {
@@ -1068,9 +1058,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                 
                 const reqData = {
                   message: content,
-                };
-
-                console.log(reqData);
+                };                
               
                 const config = {
                   method: 'post',
