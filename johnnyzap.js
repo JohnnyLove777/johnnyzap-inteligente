@@ -1055,8 +1055,14 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                 console.log(chaturl);
 
                 console.log(messageBody);
+
+                let content;                
+                if (messageData.messageType === 'conversation') {
+                  content = await johnny.processMessageIA(messageData, remoteJid, messageBody, apiKeyEVO, instanceName);
+                  } else if (messageData.messageType === 'listResponseMessage') {
+                  content = messageBody;
+                  }
                 
-                const content = await johnny.processMessageIA(messageData, remoteJid, messageBody, apiKeyEVO, instanceName);
                 db.updateNextAudio(remoteJid, false);
                 db.updateNextImage(remoteJid, false);        
                 
