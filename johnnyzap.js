@@ -467,6 +467,26 @@ function createFolderIfNotExists(folderPath) {
         console.log(`Pasta já existe: ${folderPath}`);
     }
 }
+
+function gerarSecoes(items) {
+  // Inicializa um array para armazenar as linhas
+  const rows = items.map((item, index) => {
+    return {
+      title: item.content, // Atribui o valor de content a title
+      rowId: `rowId_${index + 1}` // Cria um rowId baseado no índice
+    };
+  });
+
+  // Retorna o objeto secoes com o título e as linhas geradas
+  const secoes = [
+    {
+      title: "Escolha abaixo",
+      rows: rows
+    }
+  ];
+
+  return secoes;
+}
   
 // Caminhos das pastas
 const leadsPath = path.join(__dirname, 'leadslista');
@@ -811,6 +831,7 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
       if (input.type === 'choice input') {
       const items = input.items;
       console.log(JSON.stringify(items, null, 2));  // Imprime os itens no console
+      const secoes = gerarSecoes(items);
       /*const secoes = [
         {
           title: "Opções",
@@ -820,54 +841,22 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
             rowId: `rowId_${index + 1}`
           }))
         }
-      ];*/
+      ];
       const secoes = [
         {
-          title: "Entradas",
+          title: "Escolha abaixo",
           rows: [
             {
               title: "Salada Caesar",
-              description: "Uma clássica salada Caesar com alface romana, croutons e molho especial.",
-              rowId: "rowId_entradas_001"
+              rowId: "rowId_001"
             },
             {
               title: "Sopa de Tomate",
-              description: "Sopa cremosa de tomate com manjericão fresco.",
-              rowId: "rowId_entradas_002"
-            }
-          ]
-        },
-        {
-          title: "Pratos Principais",
-          rows: [
-            {
-              title: "Filé Mignon",
-              description: "Filé mignon grelhado servido com batatas rústicas e legumes ao vapor.",
-              rowId: "rowId_pratos_001"
-            },
-            {
-              title: "Lasanha à Bolonhesa",
-              description: "Lasanha tradicional com molho bolonhesa, queijo derretido e molho bechamel.",
-              rowId: "rowId_pratos_002"
-            }
-          ]
-        },
-        {
-          title: "Sobremesas",
-          rows: [
-            {
-              title: "Cheesecake de Morango",
-              description: "Cheesecake cremoso com cobertura de morangos frescos.",
-              rowId: "rowId_sobremesas_001"
-            },
-            {
-              title: "Tiramisu",
-              description: "Tradicional tiramisu italiano com café, mascarpone e cacau.",
-              rowId: "rowId_sobremesas_002"
+              rowId: "rowId_002"
             }
           ]
         }
-      ];
+      ];*/
 
       johnny.EnviarLista(datafrom,"Escolha abaixo", "Escolha uma das opções abaixo para saber mais detalhes", "Clique aqui", "Vamos lá", secoes, 3000, apiKeyEVO, instanceName);
       }
@@ -1024,7 +1013,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
     if (messageData.messageType === 'conversation') {
     messageBody = messageData.message.conversation;
     } else if (messageData.messageType === 'listResponseMessage') {
-    messageBody = messageData.message.listResponseMessage.description;
+    messageBody = messageData.message.listResponseMessage.title;
     }
     const remoteJid = messageData.key.remoteJid; // Numero de wpp do remetente
     const messageId = messageData.key.id; // ID da mensagem original para reações e baixar mídia
@@ -1327,6 +1316,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                   if (input.type === 'choice input') {
                   const items = input.items;
                   console.log(JSON.stringify(items, null, 2));  // Imprime os itens no console
+                  const secoes = gerarSecoes(items);
 
                   /*const secoes = [
         {
@@ -1337,54 +1327,22 @@ app.post('/webhook/messages-upsert', async (req, res) => {
             rowId: `rowId_${index + 1}`
           }))
         }
-      ];*/
+      ];
       const secoes = [
         {
-          title: "Entradas",
+          title: "Escolha abaixo",
           rows: [
             {
               title: "Salada Caesar",
-              description: "Uma clássica salada Caesar com alface romana, croutons e molho especial.",
-              rowId: "rowId_entradas_001"
+              rowId: "rowId_001"
             },
             {
               title: "Sopa de Tomate",
-              description: "Sopa cremosa de tomate com manjericão fresco.",
-              rowId: "rowId_entradas_002"
-            }
-          ]
-        },
-        {
-          title: "Pratos Principais",
-          rows: [
-            {
-              title: "Filé Mignon",
-              description: "Filé mignon grelhado servido com batatas rústicas e legumes ao vapor.",
-              rowId: "rowId_pratos_001"
-            },
-            {
-              title: "Lasanha à Bolonhesa",
-              description: "Lasanha tradicional com molho bolonhesa, queijo derretido e molho bechamel.",
-              rowId: "rowId_pratos_002"
-            }
-          ]
-        },
-        {
-          title: "Sobremesas",
-          rows: [
-            {
-              title: "Cheesecake de Morango",
-              description: "Cheesecake cremoso com cobertura de morangos frescos.",
-              rowId: "rowId_sobremesas_001"
-            },
-            {
-              title: "Tiramisu",
-              description: "Tradicional tiramisu italiano com café, mascarpone e cacau.",
-              rowId: "rowId_sobremesas_002"
+              rowId: "rowId_002"
             }
           ]
         }
-      ];
+      ];*/
 
                   johnny.EnviarLista(remoteJid,"Escolha abaixo", "Escolha uma das opções abaixo para saber mais detalhes", "Clique aqui", "Vamos lá", secoes, 3000, apiKeyEVO, instanceName);
                   }
