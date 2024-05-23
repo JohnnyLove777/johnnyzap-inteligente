@@ -1053,6 +1053,8 @@ app.post('/webhook/messages-upsert', async (req, res) => {
 
                 console.log(sessionId);
                 console.log(chaturl);
+
+                console.log(messageBody);
                 
                 const content = await johnny.processMessageIA(messageData, remoteJid, messageBody, apiKeyEVO, instanceName);
                 db.updateNextAudio(remoteJid, false);
