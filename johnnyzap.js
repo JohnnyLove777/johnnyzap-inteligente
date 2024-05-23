@@ -1020,6 +1020,8 @@ app.post('/webhook/messages-upsert', async (req, res) => {
       } else if (!fromMe) {
            
         const typebotKey = await db.readFluxo(remoteJid);
+        console.log(typebotKey);
+        console.log(remoteJid);
 
         if (!typebotKey) {
             if (remoteJid.endsWith('@s.whatsapp.net')) {
@@ -1043,9 +1045,14 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                             
               db.updateInteract(remoteJid, 'typing');
               db.updateId(remoteJid, messageId);
-                
+
+              console.log(remoteJid);
+                              
                 const sessionId = await db.readSessionId(remoteJid);
                 const chaturl = `${db.readInstanceURL(instanceName).url_chat}${sessionId}/continueChat`;
+
+                console.log(sessionId);
+                console.log(chaturl);
                 
                 const content = await johnny.processMessageIA(messageData, remoteJid, messageBody, apiKeyEVO, instanceName);
                 db.updateNextAudio(remoteJid, false);
@@ -1054,6 +1061,8 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                 const reqData = {
                   message: content,
                 };
+
+                console.log(reqData);
               
                 const config = {
                   method: 'post',
