@@ -203,7 +203,7 @@ async function EnviarLista(numeroId, titulo, descricao, textoBotao, textoRodape,
   const listPostData = {
     number: numeroId,
     options: {
-      delay: delay,
+      ...(delay !== null && { delay: delay }),
       presence: 'composing'
     },
     listMessage: {
@@ -215,7 +215,8 @@ async function EnviarLista(numeroId, titulo, descricao, textoBotao, textoRodape,
     }
   };
 
-  return axios.post(
+  return brokerMaster(
+    axios.post,
     `${API_BASE_URL}/message/sendList/${instanceName}`,
     listPostData,
     {
