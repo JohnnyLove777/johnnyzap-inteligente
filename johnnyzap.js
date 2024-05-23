@@ -1011,7 +1011,8 @@ app.post('/webhook/messages-upsert', async (req, res) => {
   
     try {
       const fromMe = await johnny.isFromMe(event);
-      //console.log(`fromMe: ${fromMe}`);
+      console.log(`fromMe: ${fromMe}`);
+      console.log(messageData);
   
       if (fromMe) {
         // Resposta Rápida
