@@ -199,7 +199,7 @@ async function EnviarLocalizacao(numeroId, nome, endereco, latitude, longitude, 
   );
 }
 
-async function EnviarLista(numeroId, titulo, descricao, textoBotao, secoes, delay, apikey, instanceName) {
+async function EnviarLista(numeroId, titulo, descricao, textoBotao, textoRodape, secoes, delay, apikey, instanceName) {
   const listPostData = {
     number: numeroId,
     options: {
@@ -210,6 +210,7 @@ async function EnviarLista(numeroId, titulo, descricao, textoBotao, secoes, dela
       title: titulo,
       description: descricao,
       buttonText: textoBotao,
+      footerText: textoRodape,
       sections: secoes
     }
   };

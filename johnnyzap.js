@@ -821,7 +821,7 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
         }
       ];
 
-      await johnny.EnviarLista(datafrom, "Escolha uma resposta", "Selecione uma das opções abaixo:", "Clique aqui para escolher", secoes, 3000, apiKeyEVO, instanceName);
+      johnny.EnviarLista(datafrom,"Escolha abaixo", "Escolha uma das opções abaixo para saber mais detalhes", "Clique aqui", "Vamos lá", secoes, 3000, apiKeyEVO, instanceName);
       }
       }
 
@@ -1289,7 +1289,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                   }
                   ];
 
-                  await johnny.EnviarLista(remoteJid, "Escolha uma resposta", "Selecione uma das opções abaixo:", "Clique aqui para escolher", secoes, 3000, apiKeyEVO, instanceName);
+                  johnny.EnviarLista(remoteJid,"Escolha abaixo", "Escolha uma das opções abaixo para saber mais detalhes", "Clique aqui", "Vamos lá", secoes, 3000, apiKeyEVO, instanceName);
                   }
                   }
                   
