@@ -806,6 +806,25 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
         } 
       }
 
+      const input = response.data.input;
+      if (input) {
+      if (input.type === 'choice input') {
+      const items = input.items;
+      const secoes = [
+        {
+          title: "Opções",
+          rows: items.map((item, index) => ({
+            title: item.content,
+            description: '',
+            rowId: `rowId_${index + 1}`
+          }))
+        }
+      ];
+
+      await EnviarLista(datafrom, "Escolha uma resposta", "Selecione uma das opções abaixo:", "Clique aqui para escolher", secoes, 3000, apiKeyEVO, instanceName);
+      }
+      }
+
       if(db.existsDB(datafrom)){
         db.updateSessionId(datafrom, response.data.sessionId);
         db.updateId(datafrom, dataid);
@@ -934,6 +953,10 @@ async function processMessageRMKT(datafrom, messageId, url, name, instanceName, 
   }
 }
 
+app.get('/', (req, res) => {
+  res.send('JohhnyZap Server está OK =)');
+});
+
 // Listener de Mensagem Recebida e Enviada
 app.post('/webhook/messages-upsert', async (req, res) => {
     
@@ -948,7 +971,13 @@ app.post('/webhook/messages-upsert', async (req, res) => {
     return;
     }
     const apiKeyEVO = instanceData.apiKeyEVO;
-    const messageBody = messageData.message.conversation; // Mensagem enviada
+    let messageBody = messageData.message.conversation; // Mensagem enviada
+    // Verificar o tipo de mensagem
+    if (messageData.messageType === 'conversation') {
+    messageBody = messageData.message.conversation;
+    } else if (messageData.messageType === 'listResponseMessage') {
+    messageBody = messageData.message.listResponseMessage.description;
+    }
     const remoteJid = messageData.key.remoteJid; // Numero de wpp do remetente
     const messageId = messageData.key.id; // ID da mensagem original para reações e baixar mídia
   
@@ -1243,7 +1272,27 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                         //db.updateDelay(remoteJid, null);
                     }  
                                             
-                  }                  
+                  }
+
+                  const input = response.data.input;
+                  if (input) {
+                  if (input.type === 'choice input') {
+                  const items = input.items;
+                  const secoes = [
+                  {
+                  title: "Opções",
+                  rows: items.map((item, index) => ({
+                  title: item.content,
+                  description: '',
+                  rowId: `rowId_${index + 1}`
+                  }))
+                  }
+                  ];
+
+                  await EnviarLista(remoteJid, "Escolha uma resposta", "Selecione uma das opções abaixo:", "Clique aqui para escolher", secoes, 3000, apiKeyEVO, instanceName);
+                  }
+                  }
+                  
                   db.updateInteract(remoteJid, 'done');
                 } catch (error) {
                   console.log(error);
