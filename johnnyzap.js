@@ -810,6 +810,7 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
       if (input) {
       if (input.type === 'choice input') {
       const items = input.items;
+      console.log(JSON.stringify(items, null, 2));  // Imprime os itens no console
       /*const secoes = [
         {
           title: "Opções",
@@ -1325,6 +1326,8 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                   if (input) {
                   if (input.type === 'choice input') {
                   const items = input.items;
+                  console.log(JSON.stringify(items, null, 2));  // Imprime os itens no console
+
                   /*const secoes = [
         {
           title: "Opções",
