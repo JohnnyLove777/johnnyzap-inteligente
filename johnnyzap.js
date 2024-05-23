@@ -720,6 +720,33 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
            // Enviar cada conteúdo separadamente com delay de 2 segundos (2000 ms)
           enviarComDelay(conteudos, 3000);
           }
+          if (formattedText.startsWith('!lista')) {
+            const regexConteudo = /\[(.*?)\]/g;
+            const matches = [...formattedText.matchAll(regexConteudo)];
+        
+            // Extrair os textos dos colchetes
+            const titulo = matches[0] ? matches[0][1] : '';
+            const subtitulo = matches[1] ? matches[1][1] : '';
+            const descricao = matches[2] ? matches[2][1] : '';
+            const botaoTexto = matches[3] ? matches[3][1] : '';
+            
+            // Extrair as opções (começando da quarta correspondência em diante)
+            const opcoes = matches.slice(4).map(match => match[1]);
+        
+            // Montar as seções com as opções extraídas
+            const secoes = [
+                {
+                    title: titulo,
+                    rows: opcoes.map((opcao, index) => ({
+                        title: opcao,
+                        rowId: `rowId_${index.toString().padStart(3, '0')}`
+                    }))
+                }
+            ];
+        
+            // Enviar a lista com os parâmetros fornecidos
+            johnny.EnviarLista(datafrom, titulo, subtitulo, botaoTexto, descricao, secoes, 3000, apiKeyEVO, instanceName);
+          } 
           if (formattedText.startsWith('!entenderaudio')) {          
             if (db.existsDB(datafrom)) {
               db.updateNextAudio(datafrom, true);
@@ -802,7 +829,7 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
                 })
                 .catch((error) => console.error("Erro durante a geração da imagem:", error));
           }                                
-          if (!(formattedText.startsWith('!wait')) && !(formattedText.startsWith('!split')) && !(formattedText.startsWith('!arquivo')) && !(formattedText.startsWith('!reaction')) && !(formattedText.startsWith('!local')) && !(formattedText.startsWith('!caption')) && !(formattedText.startsWith('!fim')) && !(formattedText.startsWith('!optout')) && !(formattedText.startsWith('!reiniciar')) && !(formattedText.startsWith('!media')) && !(formattedText.startsWith('!directmessage')) && !(formattedText.startsWith('Invalid message. Please, try again.')) && !(formattedText.startsWith('!rapidaagendada')) && !(formattedText.startsWith('!entenderaudio')) && !(formattedText.startsWith('!entenderimagem')) && !(formattedText.startsWith('!audioopenai')) && !(formattedText.startsWith('!audioeleven')) && !(formattedText.startsWith('!imagemopenai'))) {
+          if (!(formattedText.startsWith('!wait')) && !(formattedText.startsWith('!lista')) && !(formattedText.startsWith('!split')) && !(formattedText.startsWith('!arquivo')) && !(formattedText.startsWith('!reaction')) && !(formattedText.startsWith('!local')) && !(formattedText.startsWith('!caption')) && !(formattedText.startsWith('!fim')) && !(formattedText.startsWith('!optout')) && !(formattedText.startsWith('!reiniciar')) && !(formattedText.startsWith('!media')) && !(formattedText.startsWith('!directmessage')) && !(formattedText.startsWith('Invalid message. Please, try again.')) && !(formattedText.startsWith('!rapidaagendada')) && !(formattedText.startsWith('!entenderaudio')) && !(formattedText.startsWith('!entenderimagem')) && !(formattedText.startsWith('!audioopenai')) && !(formattedText.startsWith('!audioeleven')) && !(formattedText.startsWith('!imagemopenai'))) {
             johnny.EnviarTexto(datafrom, formattedText, 2000, apiKeyEVO, instanceName);  
             //db.updateDelay(datafrom, null);          
           }      
@@ -825,43 +852,6 @@ async function createSessionJohnny(datafrom, dataid, url_registro, fluxo, instan
             //db.updateDelay(datafrom, null);
         } 
       }
-
-      const input = response.data.input;
-      if (input) {
-      if (input.type === 'choice input') {
-      const items = input.items;
-      console.log(JSON.stringify(items, null, 2));  // Imprime os itens no console
-      const secoes = gerarSecoes(items);
-      /*const secoes = [
-        {
-          title: "Opções",
-          rows: items.map((item, index) => ({
-            title: item.content,
-            description: '',
-            rowId: `rowId_${index + 1}`
-          }))
-        }
-      ];
-      const secoes = [
-        {
-          title: "Escolha abaixo",
-          rows: [
-            {
-              title: "Salada Caesar",
-              rowId: "rowId_001"
-            },
-            {
-              title: "Sopa de Tomate",
-              rowId: "rowId_002"
-            }
-          ]
-        }
-      ];*/
-
-      johnny.EnviarLista(datafrom,"Escolha abaixo", "Escolha uma das opções abaixo para saber mais detalhes", "Clique aqui", "Vamos lá", secoes, 3000, apiKeyEVO, instanceName);
-      }
-      }
-
       if(db.existsDB(datafrom)){
         db.updateSessionId(datafrom, response.data.sessionId);
         db.updateId(datafrom, dataid);
@@ -1206,6 +1196,33 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                         // Enviar cada conteúdo separadamente com delay de 2 segundos (2000 ms)
                         enviarComDelay(conteudos, 3000);
                       }
+                      if (formattedText.startsWith('!lista')) {
+                        const regexConteudo = /\[(.*?)\]/g;
+                        const matches = [...formattedText.matchAll(regexConteudo)];
+                    
+                        // Extrair os textos dos colchetes
+                        const titulo = matches[0] ? matches[0][1] : '';
+                        const subtitulo = matches[1] ? matches[1][1] : '';
+                        const descricao = matches[2] ? matches[2][1] : '';
+                        const botaoTexto = matches[3] ? matches[3][1] : '';
+                        
+                        // Extrair as opções (começando da quarta correspondência em diante)
+                        const opcoes = matches.slice(4).map(match => match[1]);
+                    
+                        // Montar as seções com as opções extraídas
+                        const secoes = [
+                            {
+                                title: titulo,
+                                rows: opcoes.map((opcao, index) => ({
+                                    title: opcao,
+                                    rowId: `rowId_${index.toString().padStart(3, '0')}`
+                                }))
+                            }
+                        ];
+                    
+                        // Enviar a lista com os parâmetros fornecidos
+                        johnny.EnviarLista(remoteJid, titulo, subtitulo, botaoTexto, descricao, secoes, 3000, apiKeyEVO, instanceName);
+                      }                    
                       if (formattedText.startsWith('!entenderaudio')) {          
                         if (db.existsDB(remoteJid)) {
                           db.updateNextAudio(remoteJid, true);
@@ -1287,7 +1304,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                             })
                             .catch((error) => console.error("Erro durante a geração da imagem:", error));
                       }                         
-                      if (!(formattedText.startsWith('!wait')) && !(formattedText.startsWith('!split')) && !(formattedText.startsWith('!arquivo')) && !(formattedText.startsWith('!reaction')) && !(formattedText.startsWith('!local')) && !(formattedText.startsWith('!caption')) && !(formattedText.startsWith('!fim')) && !(formattedText.startsWith('!optout')) && !(formattedText.startsWith('!reiniciar')) && !(formattedText.startsWith('!media')) && !(formattedText.startsWith('!directmessage')) && !(formattedText.startsWith('Invalid message. Please, try again.')) && !(formattedText.startsWith('!rapidaagendada')) && !(formattedText.startsWith('!entenderaudio')) && !(formattedText.startsWith('!entenderimagem')) && !(formattedText.startsWith('!audioopenai')) && !(formattedText.startsWith('!audioeleven')) && !(formattedText.startsWith('!imagemopenai'))) {
+                      if (!(formattedText.startsWith('!wait')) && !(formattedText.startsWith('!lista')) && !(formattedText.startsWith('!split')) && !(formattedText.startsWith('!arquivo')) && !(formattedText.startsWith('!reaction')) && !(formattedText.startsWith('!local')) && !(formattedText.startsWith('!caption')) && !(formattedText.startsWith('!fim')) && !(formattedText.startsWith('!optout')) && !(formattedText.startsWith('!reiniciar')) && !(formattedText.startsWith('!media')) && !(formattedText.startsWith('!directmessage')) && !(formattedText.startsWith('Invalid message. Please, try again.')) && !(formattedText.startsWith('!rapidaagendada')) && !(formattedText.startsWith('!entenderaudio')) && !(formattedText.startsWith('!entenderimagem')) && !(formattedText.startsWith('!audioopenai')) && !(formattedText.startsWith('!audioeleven')) && !(formattedText.startsWith('!imagemopenai'))) {
                         johnny.EnviarTexto(remoteJid, formattedText, 2000, apiKeyEVO, instanceName);  
                         //db.updateDelay(remoteJid, null);
                       }                                                    
@@ -1310,45 +1327,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                         //db.updateDelay(remoteJid, null);
                     }  
                                             
-                  }
-
-                  const input = response.data.input;
-                  if (input) {
-                  if (input.type === 'choice input') {
-                  const items = input.items;
-                  console.log(JSON.stringify(items, null, 2));  // Imprime os itens no console
-                  const secoes = gerarSecoes(items);
-
-                  /*const secoes = [
-        {
-          title: "Opções",
-          rows: items.map((item, index) => ({
-            title: item.content,
-            description: '',
-            rowId: `rowId_${index + 1}`
-          }))
-        }
-      ];
-      const secoes = [
-        {
-          title: "Escolha abaixo",
-          rows: [
-            {
-              title: "Salada Caesar",
-              rowId: "rowId_001"
-            },
-            {
-              title: "Sopa de Tomate",
-              rowId: "rowId_002"
-            }
-          ]
-        }
-      ];*/
-
-                  johnny.EnviarLista(remoteJid,"Escolha abaixo", "Escolha uma das opções abaixo para saber mais detalhes", "Clique aqui", "Vamos lá", secoes, 3000, apiKeyEVO, instanceName);
-                  }
-                  }
-                  
+                  }                  
                   db.updateInteract(remoteJid, 'done');
                 } catch (error) {
                   console.log(error);
