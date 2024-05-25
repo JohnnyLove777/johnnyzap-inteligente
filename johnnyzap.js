@@ -1049,6 +1049,8 @@ app.post('/webhook/messages-upsert', async (req, res) => {
 
                 let content;                
                 if (!messageData.messageType === 'listResponseMessage') {
+                  console.log('--------------------');
+                  console.log(messageData);
                   content = await johnny.processMessageIA(messageData, remoteJid, messageBody, apiKeyEVO, instanceName);
                   } else if (messageData.messageType === 'listResponseMessage') {
                   content = messageBody;
