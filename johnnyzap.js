@@ -1000,6 +1000,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
     const apiKeyEVO = instanceData.apiKeyEVO;
     let messageBody = messageData.message.conversation; // Mensagem enviada
     // Verificar o tipo de mensagem
+    console.log(messageData);
     if (messageData.messageType === 'conversation') {
     messageBody = messageData.message.conversation;
     } else if (messageData.messageType === 'listResponseMessage') {
