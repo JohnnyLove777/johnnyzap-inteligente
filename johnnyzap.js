@@ -1000,7 +1000,6 @@ app.post('/webhook/messages-upsert', async (req, res) => {
     const apiKeyEVO = instanceData.apiKeyEVO;
     let messageBody = messageData.message.conversation; // Mensagem enviada
     // Verificar o tipo de mensagem
-    console.log(messageData);
     if (messageData.messageType === 'conversation') {
     messageBody = messageData.message.conversation;
     } else if (messageData.messageType === 'listResponseMessage') {
@@ -1049,8 +1048,6 @@ app.post('/webhook/messages-upsert', async (req, res) => {
 
                 let content;                
                 if (messageData.messageType === 'audioMessage' || messageData.messageType === 'imageMessage' || messageData.messageType === 'conversation') {
-                  console.log('--------------------');
-                  console.log(messageData);
                   content = await johnny.processMessageIA(messageData, remoteJid, messageBody, apiKeyEVO, instanceName);
                   } else if (messageData.messageType === 'listResponseMessage') {
                   content = messageBody;
