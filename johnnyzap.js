@@ -1048,7 +1048,7 @@ app.post('/webhook/messages-upsert', async (req, res) => {
                 const chaturl = `${db.readInstanceURL(instanceName).url_chat}${sessionId}/continueChat`;                
 
                 let content;                
-                if (!messageData.messageType === 'listResponseMessage') {
+                if (messageData.messageType === 'audioMessage' || messageData.messageType === 'imageMessage' || messageData.messageType === 'conversation') {
                   console.log('--------------------');
                   console.log(messageData);
                   content = await johnny.processMessageIA(messageData, remoteJid, messageBody, apiKeyEVO, instanceName);
